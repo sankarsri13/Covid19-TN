@@ -1,0 +1,196 @@
+#msg {
+  text-align: center;
+  font-family: "Titillium Web", sans-serif;
+  color: #718093;
+  font-size: 3rem;
+}
+.card_custom {
+  margin: 1.2rem;
+  border: 2px solid #ff7675;
+  text-align: center;
+  min-height: 190px;
+  width: 190px;
+  padding: 20px;
+  border-radius: 20px;
+  background: white;
+  color: #ff7675;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  /* box-shadow: 5px 10px 5px black; */
+
+  transition: 0.3s all ease-in;
+}
+/* #delta-total {
+  color: rgba(255, 118, 117, 0.8);
+} */
+.card_custom:hover {
+  background: #ff7675;
+  color: rgba(255, 255, 255, 1);
+}
+a {
+  text-decoration: none;
+}
+.card-recovered {
+  margin: 1.2rem;
+  border: 2px solid #00b894;
+  text-align: center;
+  min-height: 190px;
+  width: 190px;
+  padding: 20px;
+  border-radius: 20px;
+  background: white;
+  color: #00b894;
+  font-family: "Montserrat", sans-serif;
+  /* box-shadow: 5px 10px 5px black; */
+
+  transition: 0.6s;
+}
+.card-recovered:hover {
+  background: #00b894;
+  color: white;
+}
+.card-active {
+  margin: 1.2rem;
+  border: 2px solid #f0932b;
+  text-align: center;
+  min-height: 190px;
+  width: 190px;
+  padding: 20px;
+  border-radius: 20px;
+  background: white;
+  color: #f0932b;
+  font-family: "Montserrat", sans-serif;
+  /* box-shadow: 5px 10px 5px black; */
+
+  transition: 0.6s;
+}
+.card-active:hover {
+  background: #f0932b;
+  color: white;
+}
+
+.card-death {
+  margin: 1.2rem;
+  border: 2px solid #2d3436;
+  text-align: center;
+  min-height: 190px;
+  width: 190px;
+  padding: 20px;
+  border-radius: 20px;
+  background: white;
+  color: #2d3436;
+  font-family: "Montserrat", sans-serif;
+  /* box-shadow: 5px 10px 5px black; */
+
+  transition: 0.6s;
+}
+.card-death:hover {
+  background: #2d3436;
+  color: white;
+}
+.main-title {
+  text-align: center;
+  font-family: "Titillium Web", sans-serif;
+  color: #718093;
+  font-size: 3rem;
+}
+.tap {
+  text-align: center;
+  font-family: "Titillium Web", sans-serif;
+  color: #718093;
+  font-size: 2rem;
+}
+.main-container {
+  margin: 2rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-grow: column;
+}
+#last {
+  text-align: center;
+  font-family: "Work Sans", sans-serif;
+  font-size: 1.3rem;
+  color: #57606f;
+  margin-top: 50px;
+}
+.daily {
+  text-align: center;
+  font-family: "Titillium Web", sans-serif;
+  color: #718093;
+  font-size: 3rem;
+}
+.menu-bar {
+  position: absolute;
+  text-align: left;
+  color: #718093;
+  font-size: 3rem;
+}
+
+/* The Overlay (background) */
+.overlay {
+  /* Height & width depends on how you want to reveal the overlay (see JS below) */
+  height: 100%;
+  width: 0;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  background-color: rgb(0, 0, 0); /* Black fallback color */
+  background-color: rgb(0, 0, 0, 0.9); /* Black w/opacity */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+}
+
+/* Position the content inside the overlay */
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  font-family: "Titillium Web", sans-serif;
+}
+
+/* The navigation links inside the overlay */
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  margin-top: 30px;
+}
+
+/* When you mouse over the navigation links, change their color */
+.overlay a:hover,
+.overlay a:focus {
+  color: #f1f1f1;
+}
+
+/* Position the close button (top right corner) */
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+/* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+@media screen and (max-height: 450px) {
+  .overlay a {
+    font-size: 20px;
+  }
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+.nav {
+  background-color: rgba(0, 0, 0, 0);
+  padding: 0%;
+  margin-top: 0vh;
+}

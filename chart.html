@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day Wise Cases</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="stylesheet.css" type="text/css" charset="utf-8" />
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <style>
+      .switcher{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        
+      }
+      #selx{
+        font-family: 'archiaregular';
+        font-size: 1.4rem;
+        color: rgba(225, 112, 85,0.5);
+      }
+      #day-top {
+        text-align: center;
+        font-family: 'archiaregular';
+ 
+        border-radius: 5px;
+       color: rgba(225, 112, 85,1);
+        outline: none;
+        
+        
+      }
+      .main-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-content: center;
+      }
+      select{
+          min-width: 2em;
+         height:2em;
+          background-color: #00b894;
+          color: white;
+      }
+      .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color:  rgba(225, 112, 85,1);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px  rgba(225, 112, 85,1);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+    </style>
+  </head>
+
+  <body style="text-align: center;">
+   <h1  id="day-top">Day Wise Data</h1>
+   <div class="switcher">
+   <h2 id="selx">Cumulative&nbsp;</h2>
+   <label class="switch">
+   <input type="checkbox" onchange="destroy()" id="slider">
+    <span class="slider round"></span>
+  </label>
+  <h2 id="selx">&nbsp;Daily</h2>
+</div>
+    <div class="main-card">
+    
+    
+    </div>
+      <div style="height: 90vh; width: 97vw;">
+        <canvas id="myChart"></canvas>
+       
+      </div>
+    </div>
+    <script>
+      var myChart;
+      function Cumulative(){
+      var labes = [];
+      var data = [];
+      
+      let xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://api.covid19india.org/states_daily.json");
+      xhr.send();
+      xhr.onloadend = function () {
+        var json = JSON.parse(xhr.responseText);
+        var count = 0;
+        var sum = 0;
+        for (var i in json.states_daily) {
+          count++;
+          if(json.states_daily[i].status=="Confirmed"){
+            sum+=parseInt(json.states_daily[i].tn);
+            labes.push(json.states_daily[i].date);
+            data.push(sum);
+          }
+        }
+        //console.log(labes);
+        var ctx = document.getElementById("myChart").getContext("2d");
+        ctx.height = "400";
+        ctx.width = "400";
+
+       myChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: labes,
+            datasets: [
+              {
+                label: "# of Confirmed Cases",
+                data: data,
+                backgroundColor: "rgba(225, 112, 85,0.3)",
+                borderColor: "rgba(225, 112, 85,1.0)",
+                borderWidth: 2,
+                pointRadius: 0.8,
+                pointHoverRadius: 8,
+                pointStyle: "circle",
+                showGridLines:false,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              xAxes:[{
+                      gridLines: {
+                display:true
+            },
+              }],
+              yAxes: [
+                {
+                  gridLines: {
+                display:true
+            },
+                  ticks: {
+                    beginAtZero: false,
+                  },
+                },
+              ],
+            },
+          },
+        });
+
+      };
+    }
+   Cumulative();
+    function Daily(){
+      var date=[];
+        var cnt=[];
+        let xhr2 = new XMLHttpRequest();
+      xhr2.open("GET", "https://api.covid19india.org/states_daily.json");
+      xhr2.send();
+      xhr2.onloadend = function () {
+        var json = JSON.parse(xhr2.responseText);
+        var count = 0;
+        for(var i in json.states_daily){
+          if(json.states_daily[i].status=="Confirmed"){
+        date.push(json.states_daily[i].date);
+        cnt.push(json.states_daily[i].tn);
+          }
+      }
+        // console.log(date);
+        // console.log(cnt);
+        
+         var ctx = document.getElementById("myChart").getContext("2d");
+         ctx.height = "400";
+         ctx.width = "400";
+
+       myChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: date,
+            datasets: [
+              {
+                label: "# of Confirmed Cases",
+                data: cnt,
+                backgroundColor: "rgba(225, 112, 85,0.3)",
+                borderColor: "rgba(225, 112, 85,1.0)",
+                borderWidth: 2,
+                pointRadius:4,
+              barThickness:3,
+
+                
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              xAxes:[{
+                      gridLines: {
+                display:true
+            },
+              }],
+              yAxes: [
+                {
+                  gridLines: {
+                display:true
+            },
+                  ticks: {
+                    beginAtZero: false,
+                  },
+                },
+              ],
+            },
+          },
+        });
+
+      };
+
+    }
+      function destroy(){
+        var slide = document.getElementById("slider");
+        myChart.destroy();
+        if(slide.checked){
+          Daily();
+        }
+        else{
+          Cumulative();
+        }
+        
+      }
+
+
+    </script>
+
+  </body>
+</html>

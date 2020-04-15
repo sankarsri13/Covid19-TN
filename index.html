@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600&family=Montserrat:wght@500&family=Titillium+Web:wght@600&family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script
+      src="./node_modules/countup.js/dist/countUp.min.js"
+      type="module"
+    ></script>
+    <script src="./main.js" type="module"></script>
+    <script
+      src="https://kit.fontawesome.com/9096893298.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="msg" style="font-size: largest;">
+      <!-- you can set whatever style you want on this -->
+      Loading, please wait...
+    </div>
+    <div id="body" style="display: none;">
+      <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+          >&times;</a
+        >
+
+        <div class="overlay-content">
+          <a href="./chart.html">Show Daily Cases</a>
+          <a href="#">Services</a>
+          <a href="#">Clients</a>
+          <a href="#">About</a>
+        </div>
+      </div>
+
+      <!-- Image and text -->
+      <div class="nav">
+        <!-- <h1 class="menu-bar">
+          <i class="fas fa-bars" onclick="openNav()"></i>
+        </h1> -->
+        <h1 class="main-title">
+          <i class="fas fa-head-side-mask"></i>&nbspCOVID19 TN
+        </h1>
+      </div>
+      <h4 class="tap">Tap on a card to show daily data</h4>
+      <div class="main-container">
+        <a href="./chart.html">
+          <div class="card_custom">
+            <h1>
+              Affected
+            </h1>
+            <h3 id="delta-total1">0</h3>
+
+            <i class="fas fa-virus" style="font-size: 100px;"></i>
+
+            <h1 id="total-value">
+              00000000
+            </h1>
+          </div>
+        </a>
+        <a href="./chart-recovered.html">
+          <div class="card-recovered">
+            <h1>
+              Recovered
+            </h1>
+            <h3 id="delta-recoverd">0</h3>
+            <!-- <hr /> -->
+
+            <i class="fas fa-shield-virus" style="font-size: 100px;"></i>
+            <h1 id="recovered-value">
+              000000
+            </h1>
+          </div>
+        </a>
+        <a href="./chart.html">
+          <div class="card-active">
+            <h1>
+              Active
+            </h1>
+            <h3>&nbsp;</h3>
+            <!-- <hr /> -->
+
+            <i class="fas fa-lungs-virus" style="font-size: 100px;"></i>
+            <h1 id="active-value">
+              000000
+            </h1>
+          </div>
+        </a>
+        <a href="./chart-deaths.html"
+          ><div class="card-death">
+            <h1>
+              Deaths
+            </h1>
+            <h3 id="delta-deaths">0</h3>
+            <!-- <hr /> -->
+            <i class="fas fa-shield-virus" style="font-size: 100px;"></i>
+            <h1 id="deaths-value">
+              000000
+            </h1>
+          </div>
+        </a>
+      </div>
+      <p id="last"></p>
+
+      <script src="./script.js" type="module"></script>
+    </div>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $("#body").show();
+        $("#msg").hide();
+      });
+    </script>
+  </body>
+</html>
