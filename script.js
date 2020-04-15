@@ -1,4 +1,4 @@
-import { CountUp } from "./countUp.js";
+import { CountUp } from "countUp.js";
 let xhr = new XMLHttpRequest();
 xhr.open("GET", "https://api.covid19india.org/data.json");
 xhr.send();
