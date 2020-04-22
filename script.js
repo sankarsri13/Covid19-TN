@@ -1,4 +1,4 @@
-import { CountUp } from "./node_modules/countup.js/dist/countUp.min.js";
+import { CountUp } from "./CountUp.js";
 let xhr = new XMLHttpRequest();
 xhr.open("GET", "https://api.covid19india.org/data.json");
 xhr.send();
