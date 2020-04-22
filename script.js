@@ -1,8 +1,9 @@
-import { CountUp } from "./countUp.js";
+import { CountUp } from "./node_modules/countup.js/dist/countUp.min.js";
 let xhr = new XMLHttpRequest();
 xhr.open("GET", "https://api.covid19india.org/data.json");
 xhr.send();
 var total_val, recov, dea, act;
+var pos;
 xhr.onreadystatechange = function () {
   if (xhr.status == 200 && xhr.readyState == 4) {
     //   alert(`Loaded: ${xhr.status} ${xhr.response}`);
@@ -10,23 +11,29 @@ xhr.onreadystatechange = function () {
     //console.log(json);
     var parsed = JSON.parse(json);
     // var total = document.getElementById("total-value");
-    total_val = parsed.statewise[3].confirmed;
+    for (var i in parsed.statewise) {
+      if (parsed.statewise[i].statecode == "TN") {
+        pos = i;
+        break;
+      }
+    }
+    console.log(pos);
+    total_val = parsed.statewise[pos].confirmed;
+    recov = parsed.statewise[pos].recovered;
 
-    recov = parsed.statewise[3].recovered;
-
-    dea = parsed.statewise[3].deaths;
+    dea = parsed.statewise[pos].deaths;
     // var recovered = document.getElementById("recovered-value");
     // recovered.innerHTML = parsed.recovered.value;
 
-    act = parsed.statewise[3].active;
+    act = parsed.statewise[pos].active;
     var delta_tot = document.getElementById("delta-total1");
-    delta_tot.innerHTML = "+ " + parsed.statewise[3].deltaconfirmed;
+    delta_tot.innerHTML = "+ " + parsed.statewise[pos].deltaconfirmed;
     //delta_tot = document.getElementById("delta-total2");
     //delta_tot.innerHTML = "+ " + parsed.statewise[3].deltaconfirmed;
     var delta_rec = document.getElementById("delta-recoverd");
-    delta_rec.innerHTML = "+ " + parsed.statewise[3].deltarecovered;
+    delta_rec.innerHTML = "+ " + parsed.statewise[pos].deltarecovered;
     var delta_death = document.getElementById("delta-deaths");
-    delta_death.innerHTML = "+ " + parsed.statewise[3].deltadeaths;
+    delta_death.innerHTML = "+ " + parsed.statewise[pos].deltadeaths;
     //   parsed.confirmed.value - parsed.recovered.value - parsed.deaths.value;
     var last = document.getElementById("last");
     // var last_up = JSON.stringify(parsed.lastUpdate);
@@ -34,7 +41,7 @@ xhr.onreadystatechange = function () {
     // var date = last_up.split("T")[0].replace(`"`, " ");
     // var time = last_up.split("T")[1].replace(`"`, " ").replace(".000Z", "");
     // // console.log(date + "\n" + time);
-    last.innerHTML = `Last Updated on ` + parsed.statewise[3].lastupdatedtime;
+    last.innerHTML = `Last Updated on ` + parsed.statewise[pos].lastupdatedtime;
 
     //daily cases:
   }
